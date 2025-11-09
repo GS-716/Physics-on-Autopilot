@@ -714,15 +714,166 @@
         </section>
         
         <!-- NUEVA Sección HIGGS (Página vacía) -->
-        <section id="higgs" class="page-section">
-             <div>
-                <h1>Bosón de Higgs</h1>
-                <p>Esta página está en construcción.</p>
-            </div>
-        </section>
+        <section id="higgs" class="page-section" aria-labelledby="higgs-title">
+  <div class="container">
+    <!-- Título + bajada -->
+    <header>
+      <h1 id="higgs-title">Bosón de Higgs</h1>
+      <p class="lead">
+        La pieza que confirma cómo las partículas adquieren <strong>masa</strong>. 
+        No “empuja” a nada: es la <em>señal</em> de que existe un campo invisible en todo el espacio: 
+        el <strong>campo de Higgs</strong>.
+      </p>
+    </header>
 
-    </main>
+    <!-- Grid: ¿Qué es? ¿Por qué importa? ¿Cómo se detectó? -->
+    <div class="grid-3">
+      <article class="card">
+        <h3>¿Qué es?</h3>
+        <p>
+          El bosón de Higgs es una excitación del campo de Higgs, 
+          parecido a una “ola” en un océano que lo llena todo. 
+          Detectar esa ola nos dice que el océano (el campo) está ahí.
+        </p>
+      </article>
 
+      <article class="card">
+        <h3>¿Por qué importa?</h3>
+        <p>
+          Sin el campo de Higgs, electrones y quarks no tendrían masa
+          y los átomos no podrían formarse. 
+          Es una pieza central del Modelo Estándar.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>¿Cómo se detectó?</h3>
+        <p>
+          En 2012, en colisiones del LHC se observaron <em>excesos</em> de eventos
+          compatibles con Higgs desintegrándose, por ejemplo en 
+          <abbr title="Dos fotones">γγ</abbr> y <abbr title="Dos bosones Z">ZZ</abbr>.
+        </p>
+      </article>
+    </div>
+
+    <!-- Datos rápidos -->
+    <section aria-labelledby="higgs-facts-title">
+      <h2 id="higgs-facts-title">Datos rápidos</h2>
+      <ul class="facts">
+        <li><strong>Masa:</strong> ≈ 125 GeV/c² (unas 133 veces un protón).</li>
+        <li><strong>Espín:</strong> 0 (partícula escalar).</li>
+        <li><strong>Vida media:</strong> ~10⁻²² s (se desintegra casi al instante).</li>
+        <li><strong>Vías de desintegración:</strong> γγ, ZZ*, WW*, bb̄, τ⁺τ⁻, …</li>
+      </ul>
+    </section>
+
+    <!-- Modo simple / Modo técnico -->
+    <section aria-labelledby="higgs-modes-title">
+      <h2 id="higgs-modes-title">Entenderlo a tu ritmo</h2>
+
+      <div class="mode-toggle" role="tablist" aria-label="Cambiar modo">
+        <button id="tab-simple" class="tab active" role="tab" aria-selected="true" aria-controls="panel-simple">
+          Modo simple
+        </button>
+        <button id="tab-tech" class="tab" role="tab" aria-selected="false" aria-controls="panel-tech">
+          Modo técnico
+        </button>
+      </div>
+
+      <div id="panel-simple" class="panel" role="tabpanel" aria-labelledby="tab-simple">
+        <p>
+          Imagina que el espacio está lleno de un “gel” (el campo de Higgs). 
+          Partículas que “se pegan” más a ese gel se mueven con más dificultad: 
+          eso se manifiesta como <strong>masa</strong>. 
+          A veces el gel vibra: esa vibración es el bosón de Higgs.
+        </p>
+      </div>
+
+      <div id="panel-tech" class="panel hidden" role="tabpanel" aria-labelledby="tab-tech">
+        <p>
+          El Higgs implementa ruptura espontánea de la simetría electrodébil 
+          en el grupo SU(2)<sub>L</sub>×U(1)<sub>Y</sub>. 
+          El valor de expectación del campo <em>v</em> ≈ 246 GeV otorga masas 
+          a fermiones mediante acoplamientos de Yukawa y a W/Z vía el mecanismo de Brout–Englert–Higgs. 
+          El modo físico observado es un escalar neutro CP-par incluso.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ desplegable -->
+    <section aria-labelledby="higgs-faq-title">
+      <h2 id="higgs-faq-title">Preguntas frecuentes</h2>
+
+      <details>
+        <summary>Si el Higgs da masa, ¿por qué los fotones no la tienen?</summary>
+        <p>Porque no interactúan con el campo de Higgs; su acoplamiento efectivo es cero.</p>
+      </details>
+
+      <details>
+        <summary>¿El Higgs “crea” masa desde la nada?</summary>
+        <p>
+          No: la masa surge del acoplamiento entre partículas y el campo de Higgs, 
+          conservando siempre energía y momento.
+        </p>
+      </details>
+
+      <details>
+        <summary>¿Sigue habiendo misterios?</summary>
+        <p>
+          Sí: estabilidad del vacío, naturaleza del potencial del Higgs, acoplamientos precisos
+          y si hay varios campos (extensiones tipo 2HDM) o portales a materia oscura.
+        </p>
+      </details>
+    </section>
+
+    <!-- Call to action / enlaces -->
+    <nav class="cta-wrap" aria-label="Enlaces útiles">
+      <a class="btn" href="#higgs-evento">Ver un evento típico (H → γγ)</a>
+      <a class="btn btn-secondary" href="#metodologia">Cómo analizamos los datos</a>
+    </nav>
+  </div>
+</section>
+
+<!-- Estilos mínimos (opcional: adapta a tu CSS) -->
+<style>
+  .container{max-width:1100px;margin:0 auto;padding:2rem 1rem;}
+  .lead{opacity:.9;max-width:60ch}
+  .grid-3{display:grid;gap:1rem;margin:1.25rem 0;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:1rem;border-radius:12px}
+  .facts{display:grid;gap:.5rem;margin:.5rem 0 1.5rem;padding-left:1rem}
+  .mode-toggle{display:flex;gap:.5rem;margin:.5rem 0 1rem}
+  .tab{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:.5rem .75rem;border-radius:999px;cursor:pointer}
+  .tab.active{background:rgba(255,255,255,.12)}
+  .panel{background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.12);padding:1rem;border-radius:10px}
+  .hidden{display:none}
+  details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);padding:.8rem 1rem;border-radius:10px;margin:.5rem 0}
+  summary{cursor:pointer;font-weight:600}
+  .cta-wrap{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+  .btn{display:inline-block;padding:.6rem .9rem;border-radius:999px;border:1px solid rgba(255,255,255,.16);text-decoration:none}
+  .btn-secondary{opacity:.9}
+</style>
+
+<!-- JS mínimo para el toggle de modo -->
+<script>
+  (function(){
+    const tabSimple = document.getElementById('tab-simple');
+    const tabTech   = document.getElementById('tab-tech');
+    const panelSimple = document.getElementById('panel-simple');
+    const panelTech   = document.getElementById('panel-tech');
+
+    function activate(which){
+      const simple = (which === 'simple');
+      tabSimple.classList.toggle('active', simple);
+      tabTech.classList.toggle('active', !simple);
+      tabSimple.setAttribute('aria-selected', simple);
+      tabTech.setAttribute('aria-selected', !simple);
+      panelSimple.classList.toggle('hidden', !simple);
+      panelTech.classList.toggle('hidden', simple);
+    }
+    tabSimple.addEventListener('click', ()=>activate('simple'));
+    tabTech.addEventListener('click',   ()=>activate('tech'));
+  })();
+</script>
     <!-- 
     ============================================
     ===               FIN HTML               ===

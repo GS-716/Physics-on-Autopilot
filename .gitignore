@@ -2,3 +2,7 @@
 out/
 build/
 **/*.executed.ipynb
+.venv/
+out/
+build/
+**/*.executed.ipynb

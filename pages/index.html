@@ -58,6 +58,7 @@
             font-weight: 700;
             color: #E0E7FF;
             text-decoration: none;
+            cursor: pointer; /* Añadido para JS */
         }
 
         nav .nav-links {
@@ -72,6 +73,7 @@
             font-size: 0.9rem;
             letter-spacing: 0.5px;
             transition: opacity 0.3s ease;
+            cursor: pointer; /* Añadido para JS */
         }
 
         nav .nav-links a:hover {
@@ -99,12 +101,164 @@
         main {
             position: relative;
             z-index: 5;
+            /* El padding y min-height se mueven a .page-section */
+        }
+
+        /* Estilo base para todas las secciones de página */
+        .page-section {
+            display: none; /* Ocultas por defecto */
             padding: 4rem 3rem;
+            /* Se quita min-height y align-items para permitir scroll en INICIO */
+            width: 100%;
+        }
+
+        /* Mostrar INICIO por defecto */
+        #inicio {
+            display: flex;
+            flex-direction: column; /* Para apilar el hero y el nuevo contenido */
+            align-items: center; /* Para centrar los contenedores */
+            padding: 0; /* Quitamos el padding para que el hero ocupe todo */
+        }
+        
+        /* Estilos para las páginas vacías (para que no se vean tan mal) */
+        #historia, #contacto, #higgs { /* Añadido #higgs */
+            color: #E0E7FF;
+            text-align: center;
+            flex-direction: column; /* Para centrar el h1 y p */
+            /* Re-añadimos el centrado y altura mínima para estas páginas */
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 90px);
+        }
+
+        /* --- Estilos para la nueva página HISTORIA --- */
+        #historia {
+            justify-content: flex-start; /* Alinea el contenido al inicio */
+            text-align: left;
+        }
+        
+        #historia h1, #contacto h1, #higgs h1 { /* Añadido #higgs */
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-align: center; /* Centramos el H1 principal */
+        }
+        #historia p, #contacto p, #higgs p { /* Añadido #higgs */
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        #historia .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        #historia h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #E0E7FF;
+            border-bottom: 1px solid #3B82F6;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        #historia h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #C7D2FE;
+            margin-bottom: 1.5rem;
+        }
+        
+        .particle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .particle-card {
+            background-color: #111827; /* Azul más oscuro */
+            border: 1px solid rgba(224, 231, 255, 0.2);
+            border-radius: 12px; /* Esquinas redondeadas */
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative; /* Necesario para el candado */
+        }
+        
+        .particle-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3); /* Sombra azul al pasar el ratón */
+            border-color: #3B82F6;
+        }
+        
+        /* --- ESTILOS DE BLOQUEO --- */
+        .particle-card.locked {
+            opacity: 0.5;
+            filter: grayscale(80%);
+            pointer-events: none; /* Desactiva clics y hover */
+            cursor: not-allowed;
+        }
+        
+        .particle-card.locked::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('image_8b82e4.png'); /* Usa la imagen del candado transparente */
+            background-size: 50px 50px; /* Tamaño del candado */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(17, 24, 39, 0.6); /* Fondo oscuro semitransparente */
+            border-radius: 12px; /* Para coincidir con la tarjeta */
+        }
+        /* --- FIN ESTILOS DE BLOQUEO --- */
+
+        .particle-image-container {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            height: 100px;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 90px); /* Ajusta la altura para centrar */
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            color: #E0E7FF;
         }
+        
+        /* Colores por tipo de partícula */
+        [data-particle-type="quark"] .particle-image-container {
+            background-color: rgba(59, 130, 246, 0.2); /* Azul */
+        }
+        [data-particle-type="lepton"] .particle-image-container {
+            background-color: rgba(16, 185, 129, 0.2); /* Verde */
+        }
+        [data-particle-type="boson"] .particle-image-container {
+            background-color: rgba(239, 68, 68, 0.2); /* Rojo */
+        }
+        
+        .particle-card h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #E0E7FF;
+        }
+        
+        .particle-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        /* --- Fin Estilos HISTORIA --- */
+
 
         .hero-container {
             display: grid;
@@ -115,6 +269,8 @@
             align-items: center;
             max-width: 1300px;
             width: 100%;
+            min-height: calc(100vh - 90px); /* Hacemos que la portada ocupe la pantalla */
+            padding: 2rem; /* Añadimos padding que estaba en .page-section */
         }
 
         /* --- Columna de Texto Central --- */
@@ -212,6 +368,52 @@
             max-height: 240px;
         }
 
+        /* --- Nueva Sección de Contenido (Lorem) --- */
+        .content-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            margin: 6rem auto; /* Espacio arriba y abajo */
+            padding: 0 2rem;
+        }
+
+        .text-block h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #E0E7FF;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-block p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .image-block img {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+            height: auto;
+        }
+        
+        /* --- Animación de Scroll --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+
         /* --- Diseño Responsivo (Móvil) --- */
         @media (max-width: 900px) {
             nav {
@@ -222,8 +424,9 @@
                 /* Ocultamos los links en móvil por simplicidad, se podría agregar un menú hamburguesa */
                 display: none;
             }
-
-            main {
+            
+            /* Ajustamos el padding de las secciones en móvil */
+            .page-section {
                 padding: 2rem 1.5rem;
             }
             
@@ -232,6 +435,7 @@
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
                 gap: 1.5rem;
+                padding: 1.5rem; /* Ajustamos padding en móvil */
             }
 
             .text-center {
@@ -272,6 +476,33 @@
                 height: 300px; /* Altura fija para imágenes en móvil */
             }
         }
+        
+        @media (max-width: 768px) {
+            .content-row {
+                grid-template-columns: 1fr; /* Una sola columna en móvil */
+                margin: 4rem auto;
+            }
+            
+            /* Ajustes para la página de historia en móvil */
+            #historia h1, #contacto h1, #higgs h1 { /* Añadido #higgs */
+                font-size: 3rem;
+            }
+            #historia h2 {
+                font-size: 2rem;
+            }
+            .particle-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+                gap: 1rem;
+            }
+            .particle-card {
+                padding: 1rem 0.5rem;
+            }
+            .particle-image-container {
+                font-size: 2.5rem;
+                height: 80px;
+            }
+        }
+
 
     </style>
     <!-- 
@@ -292,14 +523,18 @@
 
     <!-- Barra de Navegación -->
     <nav>
-        <a href="#" class="logo">Partículas</a>
+        <!-- Añadido 'nav-link' y 'data-target' al logo -->
+        <a href="#inicio" class="logo nav-link" data-target="inicio">Partículas</a>
+        
         <div class="nav-links">
-            <a href="#">TRABAJO</a>
-            <a href="#">ACERCA DE</a>
-            <button class="contact-button">CONTACTO</button>
+            <!-- Texto actualizado y atributos 'data-target' añadidos -->
+            <a href="#inicio" class="nav-link" data-target="inicio">INICIO</a>
+            <a href="#historia" class="nav-link" data-target="historia">HISTORIA</a>
+            <button class="contact-button nav-link" data-target="contacto">CONTACTO</button>
         </div>
-        <!-- Botón de contacto visible en móvil (reemplaza links) -->
-        <button class="contact-button" style="display: none;">CONTACTO</button>
+        
+        <!-- Botón de contacto visible en móvil (actualizado con data-target) -->
+        <button class="contact-button nav-link" data-target="contacto" style="display: none;">CONTACTO</button>
         <style>
             @media (max-width: 900px) {
                 nav .nav-links { display: none; }
@@ -310,34 +545,331 @@
 
     <!-- Contenido Principal -->
     <main>
-        <div class="hero-container">
+        
+        <!-- Sección INICIO (Contenido existente + nuevo contenido) -->
+        <section id="inicio" class="page-section">
             
-            <!-- Texto Central -->
-            <div class="text-center">
-                <h1>Partículas</h1>
-                <p>Creando formas naturales inspiradas por el mundo cuántico.</p>
-                <a href="#" class="main-button">VER TRABAJO</a>
+            <!-- CONTENEDOR 1: Hero (portada) -->
+            <div class="hero-container">
+                
+                <!-- Texto Central -->
+                <div class="text-center">
+                    <h1>Partículas</h1>
+                    <p>Pequeñas piezas, grandes efectos.De señales a historias: ciencia clara y visual.</p>
+                    <!-- Actualizado: Texto, clase 'nav-link' y 'data-target' añadidos -->
+                    <a href="#historia" class="main-button nav-link" data-target="historia">CONOCER HISTORIA</a>
+                </div>
+
+                <!-- Imágenes -->
+                <div class="image-wrapper image-top-left">
+                    <img src="Imagen1.png" alt="Colisión de partículas azules y naranjas">
+                </div>
+                <div class="image-wrapper image-bottom-left">
+                    <img src="Imagen3.png" alt="Diagrama de decaimiento de partículas">
+                </div>
+                <div class="image-wrapper image-right">
+                    <img src="Imagen2.jpg" alt="Partícula Muon en un acelerador">
+                </div>
+
+            </div>
+            
+            <!-- CONTENEDOR 2: Nueva sección (Lorem + Imagen) -->
+            <div class="content-row reveal-on-scroll">
+                <div class="text-block">
+                    <h2>Los ladrillos del universo</h2>
+                    <p>Las partículas son piezas diminutas que, al encontrarse y transformarse, construyen todo: luz, átomos y estrellas. Aquí seguimos sus huellas y las convertimos en historias claras y visuales.</p>
+                    <p>Son pequeñas, veloces y con grandes efectos. Mirando sus choques y movimientos entendemos desde un rayo de luz hasta tu cuerpo.</p>
+                </div>
+                <div class="image-block">
+                    <img src="modelo_estandar.png" alt="Marcador de imagen nueva">
+                </div>
             </div>
 
-            <!-- Imágenes (actualizadas con tus archivos) -->
-            <div class="image-wrapper image-top-left">
-                <!-- Reemplazado placehold.co con Imagen1.png -->
-                <img src="Imagen1.png" alt="Colisión de partículas azules y naranjas">
+        </section>
+
+        <!-- Sección HISTORIA (Página vacía) -->
+        <section id="historia" class="page-section">
+            <!-- INICIO DEL NUEVO CONTENIDO DE HISTORIA -->
+            <div>
+                <h1>El Modelo Estándar</h1>
+                <p class="subtitle">Estas son las partículas fundamentales que componen todo el universo visible. Se dividen en dos grandes familias: Fermiones (materia) y Bosones (fuerza).</p>
+
+                <!-- SECCIÓN DE BOSONES MOVIDA AQUÍ ARRIBA -->
+                <h2>Bosones (Partículas de Fuerza)</h2>
+                
+                <h3>Portadores de Fuerza y Bosón de Higgs</h3>
+                <div class="particle-grid">
+                    <!-- Tarjetas bloqueadas (clase 'locked') -->
+                    <article class="particle-card locked" data-particle-type="boson">
+                        <div class="particle-image-container">γ</div>
+                        <h4>Fotón</h4>
+                        <p>Electromag.</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="boson">
+                        <div class="particle-image-container">g</div>
+                        <h4>Gluón</h4>
+                        <p>Fuerza Fuerte</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="boson">
+                        <div class="particle-image-container">Z</div>
+                        <h4>Bosón Z</h4>
+                        <p>Fuerza Débil</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="boson">
+                        <div class="particle-image-container">W</div>
+                        <h4>Bosón W</h4>
+                        <p>Fuerza Débil</p>
+                    </article>
+                    
+                    <!-- Tarjeta de HIGGS (DESBLOQUEADA y con enlace) -->
+                    <article class="particle-card nav-link" data-particle-type="boson" data-target="higgs">
+                        <div class="particle-image-container">H</div>
+                        <h4>Bosón de Higgs</h4>
+                        <p>Campo de Higgs</p>
+                    </article>
+                </div>
+
+                <!-- SECCIÓN DE FERMIONES (AHORA DEBAJO) -->
+                <h2>Fermiones (Partículas de Materia)</h2>
+                
+                <h3>Quarks (Componentes de protones y neutrones)</h3>
+                <div class="particle-grid">
+                    <!-- Todas bloqueadas -->
+                    <article class="particle-card locked" data-particle-type="quark">
+                        <div class="particle-image-container">u</div>
+                        <h4>Up</h4>
+                        <p>Quark</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="quark">
+                        <div class="particle-image-container">d</div>
+                        <h4>Down</h4>
+                        <p>Quark</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="quark">
+                        <div class="particle-image-container">c</div>
+                        <h4>Charm</h4>
+                        <p>Quark</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="quark">
+                        <div class="particle-image-container">s</div>
+                        <h4>Strange</h4>
+                        <p>Quark</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="quark">
+                        <div class="particle-image-container">t</div>
+                        <h4>Top</h4>
+                        <p>Quark</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="quark">
+                        <div class="particle-image-container">b</div>
+                        <h4>Bottom</h4>
+                        <p>Quark</p>
+                    </article>
+                </div>
+
+                <h3>Leptones (Incluye el electrón)</h3>
+                <div class="particle-grid">
+                    <!-- Todas bloqueadas -->
+                    <article class="particle-card locked" data-particle-type="lepton">
+                        <div class="particle-image-container">e⁻</div>
+                        <h4>Electrón</h4>
+                        <p>Leptón</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="lepton">
+                        <div class="particle-image-container">μ⁻</div>
+                        <h4>Muón</h4>
+                        <p>Leptón</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="lepton">
+                        <div class="particle-image-container">τ⁻</div>
+                        <h4>Tau</h4>
+                        <p>Leptón</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="lepton">
+                        <div class="particle-image-container">νₑ</div>
+                        <h4>Neutrino e⁻</h4>
+                        <p>Leptón</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="lepton">
+                        <div class="particle-image-container">νₘ</div>
+                        <h4>Neutrino μ⁻</h4>
+                        <p>Leptón</p>
+                    </article>
+                    <article class="particle-card locked" data-particle-type="lepton">
+                        <div class="particle-image-container">νₜ</div>
+                        <h4>Neutrino τ⁻</h4>
+                        <p>Leptón</p>
+                    </article>
+                </div>
             </div>
+            <!-- FIN DEL NUEVO CONTENIDO DE HISTORIA -->
+        </section>
 
-            <div class="image-wrapper image-bottom-left">
-                <!-- Reemplazado placehold.co con Imagen3.png -->
-                <img src="Imagen3.png" alt="Diagrama de decaimiento de partículas">
+        <!-- Sección CONTACTO (Página vacía) -->
+        <section id="contacto" class="page-section">
+             <div>
+                <h1>Contacto</h1>
+                <p>Esta página está en construcción.</p>
             </div>
+        </section>
+        
+        <!-- NUEVA Sección HIGGS (Página vacía) -->
+        <section id="higgs" class="page-section" aria-labelledby="higgs-title">
+  <div class="container">
+    <!-- Título + bajada -->
+    <header>
+      <h1 id="higgs-title">Bosón de Higgs</h1>
+      <p>La pieza que confirma cómo las partículas adquieren <strong>masa</strong>. 
+        No “empuja” a nada: es la <em>señal</em> de que existe un campo invisible en todo el espacio: 
+        el <strong>campo de Higgs</strong>.<p>
+    </header>
 
-            <div class="image-wrapper image-right">
-                <!-- Reemplazado placehold.co con Imagen2.jpg -->
-                <img src="Imagen2.jpg" alt="Partícula Muon en un acelerador">
-            </div>
+    <!-- Grid: ¿Qué es? ¿Por qué importa? ¿Cómo se detectó? -->
+    <div class="grid-3">
+      <article class="card">
+        <h3>¿Qué es?</h3>
+        <p>El bosón de Higgs es una excitación del campo de Higgs, 
+         parecido a una “ola” en un océano que lo llena todo. 
+         Detectar esa ola nos dice que el océano (el campo) está ahí.</p>
+      </article>
 
-        </div>
-    </main>
+      <article class="card">
+        <h3>¿Por qué importa?</h3>
+        <p>
+          Sin el campo de Higgs, electrones y quarks no tendrían masa
+          y los átomos no podrían formarse. 
+          Es una pieza central del Modelo Estándar.
+        </p>
+      </article>
 
+      <article class="card">
+        <h3>¿Cómo se detectó?</h3>
+        <p>
+          En 2012, en colisiones del LHC se observaron <em>excesos</em> de eventos
+          compatibles con Higgs desintegrándose, por ejemplo en 
+          <abbr title="Dos fotones">γγ</abbr> y <abbr title="Dos bosones Z">ZZ</abbr>.
+        </p>
+      </article>
+    </div>
+
+    <!-- Datos rápidos -->
+    <section aria-labelledby="higgs-facts-title">
+      <h2 id="higgs-facts-title">Datos rápidos</h2>
+      <ul class="facts">
+        <li><strong>Masa:</strong> ≈ 125 GeV/c² (unas 133 veces un protón).</li>
+        <li><strong>Espín:</strong> 0 (partícula escalar).</li>
+        <li><strong>Vida media:</strong> ~10⁻²² s (se desintegra casi al instante).</li>
+        <li><strong>Vías de desintegración:</strong> γγ, ZZ*, WW*, bb̄, τ⁺τ⁻, …</li>
+      </ul>
+    </section>
+
+    <!-- Modo simple / Modo técnico -->
+    <section aria-labelledby="higgs-modes-title">
+      <h2 id="higgs-modes-title">Entenderlo a tu ritmo</h2>
+
+      <div class="mode-toggle" role="tablist" aria-label="Cambiar modo">
+        <button id="tab-simple" class="tab active" role="tab" aria-selected="true" aria-controls="panel-simple">
+          Modo simple
+        </button>
+        <button id="tab-tech" class="tab" role="tab" aria-selected="false" aria-controls="panel-tech">
+          Modo técnico
+        </button>
+      </div>
+
+      <div id="panel-simple" class="panel" role="tabpanel" aria-labelledby="tab-simple">
+        <p>
+          Imagina que el espacio está lleno de un “gel” (el campo de Higgs). 
+          Partículas que “se pegan” más a ese gel se mueven con más dificultad: 
+          eso se manifiesta como <strong>masa</strong>. 
+          A veces el gel vibra: esa vibración es el bosón de Higgs.
+        </p>
+      </div>
+
+      <div id="panel-tech" class="panel hidden" role="tabpanel" aria-labelledby="tab-tech">
+        <p>
+          El Higgs implementa ruptura espontánea de la simetría electrodébil 
+          en el grupo SU(2)<sub>L</sub>×U(1)<sub>Y</sub>. 
+          El valor de expectación del campo <em>v</em> ≈ 246 GeV otorga masas 
+          a fermiones mediante acoplamientos de Yukawa y a W/Z vía el mecanismo de Brout–Englert–Higgs. 
+          El modo físico observado es un escalar neutro CP-par incluso.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ desplegable -->
+    <section aria-labelledby="higgs-faq-title">
+      <h2 id="higgs-faq-title">Preguntas frecuentes</h2>
+
+      <details>
+        <summary>Si el Higgs da masa, ¿por qué los fotones no la tienen?</summary>
+        <p>Porque no interactúan con el campo de Higgs; su acoplamiento efectivo es cero.</p>
+      </details>
+
+      <details>
+        <summary>¿El Higgs “crea” masa desde la nada?</summary>
+        <p>
+          No: la masa surge del acoplamiento entre partículas y el campo de Higgs, 
+          conservando siempre energía y momento.
+        </p>
+      </details>
+
+      <details>
+        <summary>¿Sigue habiendo misterios?</summary>
+        <p>
+          Sí: estabilidad del vacío, naturaleza del potencial del Higgs, acoplamientos precisos
+          y si hay varios campos (extensiones tipo 2HDM) o portales a materia oscura.
+        </p>
+      </details>
+    </section>
+
+    <!-- Call to action / enlaces -->
+    <nav class="cta-wrap" aria-label="Enlaces útiles">
+      <a class="btn" href="#higgs-evento">Ver un evento típico (H → γγ)</a>
+      <a class="btn btn-secondary" href="#metodologia">Cómo analizamos los datos</a>
+    </nav>
+  </div>
+</section>
+
+<!-- Estilos mínimos (opcional: adapta a tu CSS) -->
+<style>
+  .container{max-width:1100px;margin:0 auto;padding:2rem 1rem;}
+  .lead{opacity:.9;max-width:60ch}
+  .grid-3{display:grid;gap:1rem;margin:1.25rem 0;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:1rem;border-radius:12px}
+  .facts{display:grid;gap:.5rem;margin:.5rem 0 1.5rem;padding-left:1rem}
+  .mode-toggle{display:flex;gap:.5rem;margin:.5rem 0 1rem}
+  .tab{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:.5rem .75rem;border-radius:999px;cursor:pointer}
+  .tab.active{background:rgba(255,255,255,.12)}
+  .panel{background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.12);padding:1rem;border-radius:10px}
+  .hidden{display:none}
+  details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);padding:.8rem 1rem;border-radius:10px;margin:.5rem 0}
+  summary{cursor:pointer;font-weight:600}
+  .cta-wrap{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+  .btn{display:inline-block;padding:.6rem .9rem;border-radius:999px;border:1px solid rgba(255,255,255,.16);text-decoration:none}
+  .btn-secondary{opacity:.9}
+</style>
+
+<!-- JS mínimo para el toggle de modo -->
+<script>
+  (function(){
+    const tabSimple = document.getElementById('tab-simple');
+    const tabTech   = document.getElementById('tab-tech');
+    const panelSimple = document.getElementById('panel-simple');
+    const panelTech   = document.getElementById('panel-tech');
+
+    function activate(which){
+      const simple = (which === 'simple');
+      tabSimple.classList.toggle('active', simple);
+      tabTech.classList.toggle('active', !simple);
+      tabSimple.setAttribute('aria-selected', simple);
+      tabTech.setAttribute('aria-selected', !simple);
+      panelSimple.classList.toggle('hidden', !simple);
+      panelTech.classList.toggle('hidden', simple);
+    }
+    tabSimple.addEventListener('click', ()=>activate('simple'));
+    tabTech.addEventListener('click',   ()=>activate('tech'));
+  })();
+</script>
     <!-- 
     ============================================
     ===               FIN HTML               ===
@@ -350,51 +882,43 @@
     ===          INICIO JAVASCRIPT           ===
     ============================================
     -->
-    <!-- JavaScript para las Partículas -->
     <script>
         window.onload = function() {
+            
+            // --- CÓDIGO DE PARTÍCULAS (Existente) ---
             const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
 
             let particlesArray;
 
-            // Ajustar el tamaño del canvas al de la ventana
             function setCanvasSize() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
             setCanvasSize();
 
-            // Detectar redimensionamiento de la ventana
             window.addEventListener('resize', () => {
                 setCanvasSize();
-                init(); // Reiniciar partículas al cambiar tamaño
+                init(); 
             });
 
-            // Clase para las Partículas
             class Particle {
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 1; // Tamaño entre 1 y 3
-                this.speedX = Math.random() * 1 - 0.5; // Movimiento horizontal
-                this.speedY = Math.random() * 1 - 0.5; // Movimiento vertical
-                this.color = 'rgba(224, 231, 255, 0.7)'; // Color azul pálido con opacidad
-            }
-
-            // Actualizar posición
+                    this.size = Math.random() * 2 + 1; 
+                    this.speedX = Math.random() * 1 - 0.5;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.color = 'rgba(224, 231, 255, 0.7)';
+                }
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
-
-                    // Reaparecer en los bordes opuestos
                     if (this.x > canvas.width) this.x = 0;
                     if (this.x < 0) this.x = canvas.width;
                     if (this.y > canvas.height) this.y = 0;
                     if (this.y < 0) this.y = canvas.height;
                 }
-
-                // Dibujar partícula
                 draw() {
                     ctx.fillStyle = this.color;
                     ctx.beginPath();
@@ -403,28 +927,98 @@
                 }
             }
 
-            // Crear el array de partículas
             function init() {
                 particlesArray = [];
-                // Ajustar número de partículas según el tamaño de la pantalla
                 let numberOfParticles = (canvas.width * canvas.height) / 9000;
                 for (let i = 0; i < numberOfParticles; i++) {
                     particlesArray.push(new Particle());
                 }
             }
 
-            // Bucle de animación
             function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (let i = 0; i < particlesArray.length; i++) {
                     particlesArray[i].update();
                     particlesArray[i].draw();
                 }
-                requestAnimationFrame(animate); // Llamada recursiva
+                requestAnimationFrame(animate);
             }
 
             init();
             animate();
+            
+            // --- NUEVA LÓGICA DE NAVEGACIÓN ---
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageSections = document.querySelectorAll('.page-section');
+
+            // Función para cambiar de página
+            function changePage(targetId) {
+                // Ocultar todas las secciones
+                pageSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Mostrar la sección objetivo
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    // 'flex' es necesario para el layout de las secciones
+                    targetSection.style.display = 'flex'; 
+                } else {
+                    // Si no se encuentra, mostrar inicio
+                    document.getElementById('inicio').style.display = 'flex';
+                }
+                
+                // Actualizar el hash en la URL para mejor UX
+                history.replaceState(null, null, `#${targetId}`);
+                
+                // Mover el scroll al inicio de la página al cambiar
+                window.scrollTo(0, 0);
+            }
+
+            // Añadir evento de clic a todos los enlaces de navegación
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Evitar comportamiento por defecto
+                    const targetId = link.getAttribute('data-target');
+                    if (targetId) {
+                        changePage(targetId);
+                    }
+                });
+            });
+
+            // Manejar la carga inicial de la página si hay un hash (ej. #historia)
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash) {
+                changePage(initialHash);
+            } else {
+                // Asegurarse de que 'inicio' se muestre si no hay hash
+                changePage('inicio');
+            }
+            
+            // --- NUEVA LÓGICA DE ANIMACIÓN EN SCROLL ---
+            
+            const observerOptions = {
+                root: null, // usa el viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% del elemento debe ser visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Dejar de observar una vez que es visible
+                    }
+                });
+            }, observerOptions);
+
+            // Observar todos los elementos que queramos animar
+            const elementsToReveal = document.querySelectorAll('.reveal-on-scroll');
+            elementsToReveal.forEach(el => {
+                observer.observe(el);
+            });
+            
         };
     </script>
     <!-- 

@@ -1,0 +1,3 @@
+[submodule "vendor/notebooks-collection-opendata"]
+	path = vendor/notebooks-collection-opendata
+	url = https://github.com/atlas-outreach-data-tools/notebooks-collection-opendata
